@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentationlayera/githubusercontrollers.dart';
 
 class GithubUser extends StatefulWidget {
   const GithubUser({super.key});
@@ -8,6 +9,21 @@ class GithubUser extends StatefulWidget {
 }
 
 class _GithubUserState extends State<GithubUser> {
+  Githubusercontrollers controllers = Githubusercontrollers();
+  
+  getData() {
+    
+    setState(() {});
+    controllers.fetchGithublist();
+      }
+
+@override
+  void initState() {
+    // TODO: implement initState
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +43,13 @@ class _GithubUserState extends State<GithubUser> {
               thickness: 1,
             ),
             ListTile(
-                title: Text("hy tayo ${index+1}"),
-                subtitle: Text("aowkoakw ${index+1}"),
+                leading: Image.network(controllers.githubList[index].avatarUrl),
+                title: Text(controllers.githubList[index].login),
+                subtitle: Text(controllers.githubList[index].url),
               ),
           ],
         );
-      }, itemCount: 20,)
+      }, itemCount:controllers.githubList.length,)
       ),
     );
   }
